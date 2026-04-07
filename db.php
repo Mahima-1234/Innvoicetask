@@ -1,13 +1,9 @@
 <?php
-// ========================================================================
-// 1. DATABASE CONFIGURATION & INITIALIZATION
-// ========================================================================
 $host = "localhost";
 $username = "root";
-$password = ""; // Change this if your MySQL has a password
+$password = ""; 
 $dbname = "invoice_db";
 
-// Suppress errors for clean UI fallback if DB is not reachable
 mysqli_report(MYSQLI_REPORT_OFF);
 $conn = new mysqli($host, $username, $password);
 
@@ -20,7 +16,6 @@ if (!$conn->connect_error) {
     $conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
     $conn->select_db($dbname);
 
-    // Create Customer Table
     $conn->query("CREATE TABLE IF NOT EXISTS Customer (
         mobile_number VARCHAR(15) PRIMARY KEY,
         name VARCHAR(100),
@@ -31,7 +26,6 @@ if (!$conn->connect_error) {
     $conn->query("INSERT IGNORE INTO Customer (mobile_number, name, address, gst_number) 
                   VALUES ('7499934522', 'Vishal Bharti', 'Tech Park, Pune, Maharastra', '24ABCDE1234F1B5')");
 
-    // Create Invoice Table
     $conn->query("CREATE TABLE IF NOT EXISTS Invoice (
         id INT AUTO_INCREMENT PRIMARY KEY,
         invoice_number VARCHAR(50),
